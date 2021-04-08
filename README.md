@@ -40,7 +40,14 @@ An in-browser voice note application where a user can create, delete, and listen
 
 ### App
 
-The app comonent will hold the state of isRecording
+state:
+isRecording: bool
+isPlaying: bool
+isvoiceNoteSelected: bool
+
+If all of the above are false then render the record button
+
+The app component will hold the state of isRecording
 The app component will hold the state of isPlaying
 The app component will hold the state of voiceNoteSelected
 
@@ -72,5 +79,8 @@ When recording dashboard background color changes red
 When playing background changes green
 WHen deleting user is prompted if they are sure they want to delete
 
-Testing:
+---
+
+### Testing
+
 _add stuff_
