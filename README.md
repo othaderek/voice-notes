@@ -27,6 +27,7 @@ An in-browser voice note application where a user can create, delete, and listen
 - [ ] DeleteButton
 - [ ] PlayButton
 - [ ] RecordButton
+- [ ] StopButton
 - [ ] Dashboard
 - [ ] SidePanel
 - [ ] SidePanelHeader
@@ -46,4 +47,19 @@ Header will contain a button to create new voice note
 Dashboard will conditionally render the record, play, and delete buttons depending on it's state
 
 ex. On page load the dashboard should be empy and giving a user directions on how to create/record a voice note
-ex. When recording
+scenario: When recording have stop button in dashboard
+scenario: When playing have stop button in dashboard
+scenario: When voice note selected, have play button in dashboard
+scenario: On initial load state have directions in dashboard
+
+### Side Panel
+
+### Header
+
+Stretch goals
+When recording dashboard background color changes red
+When playing background changes green
+WHen deleting user is prompted if they are sure they want to delete
+
+Testing:
+_add stuff_
