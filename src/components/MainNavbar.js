@@ -6,7 +6,9 @@ import blue from '@material-ui/core/colors/blue'
 import CreateButton from './buttons/CreateButton'
 
 const styles = (theme) => ({
-  containedBlue: {
+  appBar: {
+    alignItems: 'center',
+    zIndex: theme.zIndex.drawer + 1,
     color: theme.palette.getContrastText(blue[500]),
     backgroundColor: blue[500],
     height: '100px',
@@ -16,8 +18,8 @@ const styles = (theme) => ({
 function MainNavbar(props) {
   const { classes } = props
   return (
-    <AppBar className={classes.containedBlue}>
-      <Toolbar className={classes.containedBlue}>
+    <AppBar className={classes.appBar}>
+      <Toolbar className={classes.appBar}>
         <CreateButton />
       </Toolbar>
     </AppBar>

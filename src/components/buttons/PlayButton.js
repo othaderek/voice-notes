@@ -19,7 +19,7 @@ function PlayButton(props) {
   let [clickedOn, setClickedOn] = useState(false)
   // Ficgure out even handlers in Material UI
   return (
-    <Button className={classes.containedGreen}>
+    <Button className={classes.containedGreen} style={{ flex: 1 }}>
       <PlayArrowOutlinedIcon style={{ fill: 'white' }} />
     </Button>
   )
