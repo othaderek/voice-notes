@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import withStyles from '@material-ui/core/styles/withStyles'
 import green from '@material-ui/core/colors/green'
+import PlayArrowOutlinedIcon from '@material-ui/icons/PlayArrowOutlined'
 
 const styles = (theme) => ({
   containedGreen: {
@@ -17,7 +18,11 @@ function PlayButton(props) {
   // clickedOn state that tracks if it is on or off
   let [clickedOn, setClickedOn] = useState(false)
   // Ficgure out even handlers in Material UI
-  return <Button className={classes.containedGreen}>Play</Button>
+  return (
+    <Button className={classes.containedGreen}>
+      <PlayArrowOutlinedIcon style={{ fill: 'white' }} />
+    </Button>
+  )
 }
 
 export default withStyles(styles)(PlayButton)

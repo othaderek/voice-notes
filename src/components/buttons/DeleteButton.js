@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import withStyles from '@material-ui/core/styles/withStyles'
 import yellow from '@material-ui/core/colors/yellow'
+import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined'
 
 const styles = (theme) => ({
   containedYellow: {
@@ -17,7 +18,11 @@ function DeleteButton(props) {
   // clickedOn state that tracks if it is on or off
   let [clickedOn, setClickedOn] = useState(false)
   // Ficgure out even handlers in Material UI
-  return <Button className={classes.containedYellow}>Delete</Button>
+  return (
+    <Button className={classes.containedYellow}>
+      <CloseOutlinedIcon style={{ fill: 'white' }} />
+    </Button>
+  )
 }
 
 export default withStyles(styles)(DeleteButton)
