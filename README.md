@@ -23,12 +23,27 @@ An in-browser voice note application where a user can create, delete, and listen
 ## Components:
 
 - [ ] Header
-- [ ] Create Button
-- [ ] Create Voice Note Dashboard
-- [ ] Listen to voice note dashboard
-- [ ] Side Panel
-- [ ] Side panel header
-- [ ] Voice Notes
-- [ ] Voice Note
+- [ ] CreateButton
+- [ ] DeleteButton
+- [ ] PlayButton
+- [ ] RecordButton
+- [ ] Dashboard
+- [ ] SidePanel
+- [ ] SidePanelHeader
+- [ ] VoiceNotes
+- [ ] VoiceNote
 
 ---
+
+## Component Details
+
+### Header
+
+Header will contain a button to create new voice note
+
+### Dashboard
+
+Dashboard will conditionally render the record, play, and delete buttons depending on it's state
+
+ex. On page load the dashboard should be empy and giving a user directions on how to create/record a voice note
+ex. When recording
