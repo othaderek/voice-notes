@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import PlayButton from './components/buttons/PlayButton'
 
 function App() {
   let [count, setCount] = useState(0)
@@ -14,15 +15,7 @@ function App() {
 
   return (
     <div className='App'>
-      <marquee behavior='' direction=''>
-        <>{count}</>
-      </marquee>
-      <button id='increment' onClick={handleClick}>
-        increment
-      </button>
-      <button id='decrement' onClick={handleClick}>
-        decrement
-      </button>
+      <PlayButton />
     </div>
   )
 }
