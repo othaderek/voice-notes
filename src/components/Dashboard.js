@@ -1,6 +1,8 @@
 import withStyles from '@material-ui/core/styles/withStyles'
 import Grid from '@material-ui/core/Grid'
 import RecordButton from './buttons/RecordButton'
+import PlayButton from './buttons/PlayButton'
+import StopButton from './buttons/StopButton'
 
 const styles = () => ({
   dashboard: {
@@ -13,11 +15,18 @@ const styles = () => ({
 })
 
 function Dashboard(props) {
-  const { classes } = props
+  const { classes, recordingState } = props
   return (
     <div className={classes.dashboard}>
       <Grid container direction='column' justify='center' alignItems='center'>
-        <RecordButton />
+        {
+          {
+            recording: <StopButton />,
+            playing: <StopButton />,
+            recordReady: <RecordButton />,
+            playReady: <PlayButton />,
+          }[recordingState]
+        }
       </Grid>
     </div>
   )

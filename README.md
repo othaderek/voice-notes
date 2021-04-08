@@ -40,10 +40,11 @@ An in-browser voice note application where a user can create, delete, and listen
 
 ### App
 
-state:
-isRecording: bool
-isPlaying: bool
-isvoiceNoteSelected: bool
+#### state:
+
+- isRecording: bool
+- isPlaying: bool
+- isvoiceNoteSelected: bool
 
 If all of the above are false then render the record button
 
