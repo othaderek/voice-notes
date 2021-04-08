@@ -1,12 +1,17 @@
 import { ListItem, ListItemText } from '@material-ui/core'
-import React from 'react'
+import withStyles from '@material-ui/core/styles/withStyles'
 
-function VoiceNote() {
+const styles = () => ({
+  listItem: {},
+})
+
+function VoiceNote(props) {
+  const { classes } = props
   return (
-    <ListItem button>
+    <ListItem button className={classes.listItem}>
       <ListItemText primary={'List item'} />
     </ListItem>
   )
 }
 
-export default VoiceNote
+export default withStyles(styles)(VoiceNote)

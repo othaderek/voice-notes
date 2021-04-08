@@ -11,9 +11,6 @@ function VoiceNotes() {
       <VoiceNote />
       <VoiceNote />
       <VoiceNote />
-      <VoiceNote />
-      <VoiceNote />
-      <VoiceNote />
     </List>
   )
 }

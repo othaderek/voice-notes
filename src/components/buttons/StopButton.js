@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button'
 import withStyles from '@material-ui/core/styles/withStyles'
 import StopOutlinedIcon from '@material-ui/icons/StopOutlined'
 const styles = (theme) => ({
-  containedGrey: {
+  stopButton: {
     backgroundColor: '#A9A9A9',
     width: '200px',
     height: '80px',
@@ -16,7 +16,7 @@ function StopButton(props) {
   let [clickedOn, setClickedOn] = useState(false)
   // Ficgure out even handlers in Material UI
   return (
-    <Button className={classes.containedGrey}>
+    <Button className={classes.stopButton}>
       <StopOutlinedIcon style={{ fill: 'white' }} />
     </Button>
   )
