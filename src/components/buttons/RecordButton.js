@@ -14,13 +14,19 @@ const styles = (theme) => ({
 })
 
 function RecordButton(props) {
-  const { classes } = props
-  // clickedOn state that tracks if it is on or off
-  let [clickedOn, setClickedOn] = useState(false)
+  const { classes, handleRecordingStateChange } = props
+
+  let handleClick = (e) => {
+    handleRecordingStateChange(e.target.name)
+  }
   // Ficgure out even handlers in Material UI
   return (
-    <Button className={classes.containedRed}>
-      <AlbumOutlinedIcon />
+    <Button
+      className={classes.containedRed}
+      name='recording'
+      onClick={handleClick}
+    >
+      <AlbumOutlinedIcon name='recording' />
     </Button>
   )
 }

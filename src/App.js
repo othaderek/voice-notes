@@ -20,14 +20,38 @@ function App() {
     }
   }
 
+  const handleRecordingStateChange = (value) => {
+    console.log('handleRecordingStateChange: ' + value)
+    if (value === 'recording') {
+      // check if voice note selected
+      setIsRecording(true)
+      checkRecordingState()
+    }
+
+    if (value === 'stop') {
+      setIsRecording(false)
+      setIsPlaying(false)
+      checkRecordingState()
+    }
+
+    if (value === 'play') {
+      setIsRecording(false)
+      setIsPlaying(true)
+      checkRecordingState()
+    }
+  }
+
   useEffect(() => {
     checkRecordingState()
-  }, [])
+  })
   return (
     <div className='App'>
       <MainNavbar />
       <SidePanel />
-      <Dashboard recordingState={recordingState} />
+      <Dashboard
+        recordingState={recordingState}
+        handleRecordingStateChange={handleRecordingStateChange}
+      />
     </div>
   )
 }

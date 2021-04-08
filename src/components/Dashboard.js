@@ -15,16 +15,32 @@ const styles = () => ({
 })
 
 function Dashboard(props) {
-  const { classes, recordingState } = props
+  const { classes, recordingState, handleRecordingStateChange } = props
   return (
     <div className={classes.dashboard}>
       <Grid container direction='column' justify='center' alignItems='center'>
         {
           {
-            recording: <StopButton />,
-            playing: <StopButton />,
-            recordReady: <RecordButton />,
-            playReady: <PlayButton />,
+            recording: (
+              <StopButton
+                handleRecordingStateChange={handleRecordingStateChange}
+              />
+            ),
+            playing: (
+              <StopButton
+                handleRecordingStateChange={handleRecordingStateChange}
+              />
+            ),
+            recordReady: (
+              <RecordButton
+                handleRecordingStateChange={handleRecordingStateChange}
+              />
+            ),
+            playReady: (
+              <PlayButton
+                handleRecordingStateChange={handleRecordingStateChange}
+              />
+            ),
           }[recordingState]
         }
       </Grid>

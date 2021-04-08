@@ -11,13 +11,13 @@ const styles = (theme) => ({
 })
 
 function StopButton(props) {
-  const { classes } = props
-  // clickedOn state that tracks if it is on or off
-  let [clickedOn, setClickedOn] = useState(false)
-  // Ficgure out even handlers in Material UI
+  const { classes, handleRecordingStateChange } = props
+  let handleClick = (e) => {
+    handleRecordingStateChange(e.target.name)
+  }
   return (
-    <Button className={classes.stopButton}>
-      <StopOutlinedIcon style={{ fill: 'white' }} />
+    <Button className={classes.stopButton} name='stop' onClick={handleClick}>
+      <StopOutlinedIcon style={{ fill: 'white' }} name='stop' />
     </Button>
   )
 }
