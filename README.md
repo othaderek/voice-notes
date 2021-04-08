@@ -38,6 +38,14 @@ An in-browser voice note application where a user can create, delete, and listen
 
 ## Component Details
 
+### App
+
+The app comonent will hold the state of isRecording
+The app component will hold the state of isPlaying
+The app component will hold the state of voiceNoteSelected
+
+This state will determine conditional rendering of button components in the dashboard
+
 ### Header
 
 Header will contain a button to create new voice note
@@ -53,6 +61,9 @@ scenario: When voice note selected, have play button in dashboard
 scenario: On initial load state have directions in dashboard
 
 ### Side Panel
+
+When I create a new voice note, a new list item gets added to the side panel
+When I click a list item in the side panel it populates the dashboard with a play button
 
 ### Header
 
