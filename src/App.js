@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import localforage from 'localforage'
 
 function App() {
+  const [localforageStore, setLocalforageStore] = useState(null)
   const [isRecording, setIsRecording] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isVoiceNoteSelected, setIsVoiceNoteSelected] = useState(false)
@@ -72,11 +73,12 @@ function App() {
 
   const handleVoiceNoteIdChange = (id) => {
     setSelectedVoiceNoteId(id)
+    setAudioId(id)
     setIsVoiceNoteSelected(true)
   }
 
   const createRecording = () => {
-    const id = uuidv4()
+    let id = uuidv4()
     console.log(id)
     setAudioId(id)
     let newVoiceNote = {
@@ -84,7 +86,7 @@ function App() {
       title: 'newly created item',
       audio: null,
     }
-    localforage.setItem(id, newVoiceNote)
+    localforageStore.setItem(id, newVoiceNote)
     setVoiceNotes([...voiceNotes, newVoiceNote])
     // navigator.mediaDevices.getUserMedia({audio: true})
     // .then( stream => {...})
@@ -101,13 +103,19 @@ function App() {
   }
 
   const playAudio = () => {
-    let itemPromise = localforage.getItem(audioId)
+    let itemPromise = localforageStore.getItem(audioId)
     itemPromise.then((val) => {
       console.log(audioId, val)
     })
   }
   useEffect(() => {
-    console.log(localforage)
+    localforage.config()
+    let store = localforage.createInstance({
+      name: 'voiceNotes',
+    })
+    setLocalforageStore(store)
+  }, [])
+  useEffect(() => {
     checkRecordingState()
   })
   return (
