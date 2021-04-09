@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import localforage from 'localforage'
 
 function App() {
+  // App state
   const [localforageStore, setLocalforageStore] = useState(null)
   const [isRecording, setIsRecording] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -27,7 +28,12 @@ function App() {
   ])
   const [selectedVoiceNoteId, setSelectedVoiceNoteId] = useState(null)
   const [audioId, setAudioId] = useState(null)
+  const [mediaRecorder, setMediaRecord] = useState(null)
+  const [audioChunks, setAudioChunks] = useState([])
+  const [audioBlob, setAudioBlob] = useState(null)
+  const [audio, setAudio] = useState(null)
 
+  // App functions
   const checkRecordingState = () => {
     if (isRecording) {
       setRecordingState('recording')
@@ -78,28 +84,27 @@ function App() {
   }
 
   const createRecording = () => {
-    let id = uuidv4()
-    console.log(id)
-    setAudioId(id)
-    let newVoiceNote = {
-      id: id,
-      title: 'newly created item',
-      audio: null,
-    }
-    localforageStore.setItem(id, newVoiceNote)
+    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+      mediaRecorder = new MediaRecorder(stream)
+      mediaRecorder.start()
+
+      mediaRecorder.addEventListener('dataavailable', (e) => {
+        setAudioChunks([...audioChunks, e.data])
+      })
+      mediaRecorder.addEventListener('stop', createAudio)
+    })
+
+    createAudio()
     setVoiceNotes([...voiceNotes, newVoiceNote])
-    // navigator.mediaDevices.getUserMedia({audio: true})
-    // .then( stream => {...})
-    // Create an instance of MediaRecorder
-    // Call start on that instance
-    // add event listener 'dataavailable' to the mediaRecorder instance, the callback pushes event.data into an array called audio chunks
-    // under this event listener add another one that has a stop event that calls a createAudio callback
   }
 
   const createAudio = () => {
-    // this creates a new audio blob
-    // URL.createObjectURl(audioBlob)
-    // Create new audio object with audio url
+    setAudioBlob(new Blob(audioChunks))
+    let audioURL = URL.createObjectURL(audioBlob)
+    let newAudio = new Audio(audioURL)
+    // prompt for voice note name
+    let newVoiceNote = createNewVoiceNote('new title', audio)
+    storeNewVoiceNote(newVoiceNote)
   }
 
   const playAudio = () => {
@@ -108,6 +113,23 @@ function App() {
       console.log(audioId, val)
     })
   }
+
+  const createNewVoiceNote = (title, audio) => {
+    let id = uuidv4()
+    let newVoiceNote = {
+      id: id,
+      title: title,
+      audio: audio,
+    }
+    return newVoiceNote
+  }
+
+  const storeNewVoiceNote = (newVoiceNote) => {
+    // setItem to localforageStore
+    localforageStore.setItem(newVoiceNote.id, newVoiceNote)
+  }
+
+  // Lifecycle hooks
   useEffect(() => {
     localforage.config()
     let store = localforage.createInstance({
