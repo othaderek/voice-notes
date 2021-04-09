@@ -12,13 +12,13 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isVoiceNoteSelected, setIsVoiceNoteSelected] = useState(false)
   const [recordingState, setRecordingState] = useState('recordReady')
-  const [voiceNotes, setVoiceNotes] = useState([])
-  const [selectedVoiceNoteId, setSelectedVoiceNoteId] = useState(null)
-  const [audioId, setAudioId] = useState(null)
-  const [mediaRecorder, setMediaRecord] = useState(null)
-  const [audioChunks, setAudioChunks] = useState([])
-  const [audioBlob, setAudioBlob] = useState(null)
-  const [audio, setAudio] = useState(null)
+  let [voiceNotes, setVoiceNotes] = useState([])
+  let [selectedVoiceNoteId, setSelectedVoiceNoteId] = useState(null)
+  let [audioId, setAudioId] = useState(null)
+  let [mediaRecorder, setMediaRecorder] = useState(null)
+  let [audioChunks, setAudioChunks] = useState([])
+  let [audioBlob, setAudioBlob] = useState(null)
+  let [audio, setAudio] = useState(null)
 
   // App functions
   const checkRecordingState = () => {
@@ -70,37 +70,44 @@ function App() {
     setIsVoiceNoteSelected(true)
   }
 
-  const createRecording = () => {
+  const createRecording = async () => {
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-      mediaRecorder = new MediaRecorder(stream)
-      mediaRecorder.start()
+      let mR = new MediaRecorder(stream)
+      console.log('mediaRecorder: ', mediaRecorder)
+      mR.start()
 
-      mediaRecorder.addEventListener('dataavailable', (e) => {
+      mR.addEventListener('dataavailable', (e) => {
         setAudioChunks([...audioChunks, e.data])
       })
-      mediaRecorder.addEventListener('stop', createAudio)
+      mR.addEventListener('stop', createAudio)
     })
-
-    createAudio()
   }
 
   const createAudio = () => {
-    setAudioBlob(new Blob(audioChunks))
-    let audioURL = URL.createObjectURL(audioBlob)
-    let newAudio = new Audio(audioURL)
+    console.log('audioChunks: ', audioChunks)
+    let blob = new Blob(audioChunks)
+    setAudioBlob(blob)
+    console.log(audioBlob)
+    // let audioURL = URL.createObjectURL(audioBlob)
+    // let newAudio = new Audio(audioURL)
     // prompt for voice note name
-    let newVoiceNote = createNewVoiceNote('new title', audio)
-    storeNewVoiceNote(newVoiceNote)
+    // let newVoiceNote = createNewVoiceNote(newAudio)
+    // storeNewVoiceNote(newVoiceNote)
   }
 
   const playAudio = () => {
     // audio.play()
-    itemPromise.then((val) => {
-      console.log(audioId, val)
-    })
+    // itemPromise.then((val) => {
+    //   console.log(audioId, val)
+    // })
   }
 
-  const createNewVoiceNote = (title, audio) => {
+  const stopRecording = () => {
+    mediaRecorder.stop()
+    createAudio()
+  }
+
+  const createNewVoiceNote = (audio) => {
     let id = uuidv4()
     let d = new Date()
     let title = `${d.toLocaleDateString} ${d.toLocaleTimeString}`
@@ -154,6 +161,7 @@ function App() {
         recordingState={recordingState}
         handleRecordingStateChange={handleRecordingStateChange}
         playAudio={playAudio}
+        stopRecording={stopRecording}
       />
     </div>
   )

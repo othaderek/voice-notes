@@ -10,9 +10,10 @@ const styles = (theme) => ({
 })
 
 function StopButton(props) {
-  const { classes, handleRecordingStateChange } = props
+  const { classes, handleRecordingStateChange, stopRecording } = props
   let handleClick = (e) => {
     handleRecordingStateChange('stop')
+    stopRecording()
   }
   return (
     <Button className={classes.stopButton} onClick={handleClick}>
