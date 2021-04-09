@@ -91,6 +91,10 @@ Default state of clicked voice note should be null and when you click a voice no
 
 As far as storing voice notes goes, I think for the purpose of demonstration it woul dbe easier to store Blobs to IndexedDB and get/set the blobs using localforage. So when I click on a List Item in the side panel, on click I would be sending the id of that list item to query the voice not blob in storage. The localforage queries should be executed in each list item but most of the application state is in app and voice note data will render in the dashboard. So the click event will have to travel up from the ListItems, through the List, through the SidePanel and into the App component, add the current list item to a currentVoiceNoteState and travel down into the dashboard. This might be a good point to use Redux.
 
+### Creating the actual audio
+
+The audio will be created using a few different pieces. The first is we need an audio element, this will use the internal microphone on the device we are using this app with. Then we need to create and instance of MediaRecorder, call start on that instance, add an event listener to media recorder instance and ad event data to the audio chunks array, create a blob instance with the audio chunks and then create and audio url with URL.createObjectUrl(audioBlob) and then a new audio instance with that audio url. We will be using the play and stop methods on this audio instance.
+
 ### Testing
 
 _add stuff_
