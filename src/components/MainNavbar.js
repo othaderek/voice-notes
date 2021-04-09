@@ -16,11 +16,11 @@ const styles = (theme) => ({
 })
 
 function MainNavbar(props) {
-  const { classes } = props
+  const { classes, handleRecordingStateChange } = props
   return (
     <AppBar className={classes.appBar}>
       <Toolbar className={classes.appBar}>
-        <CreateButton />
+        <CreateButton handleRecordingStateChange={handleRecordingStateChange} />
       </Toolbar>
     </AppBar>
   )

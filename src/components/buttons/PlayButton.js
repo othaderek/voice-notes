@@ -14,12 +14,12 @@ const styles = (theme) => ({
 })
 
 function PlayButton(props) {
-  const { classes } = props
-  // clickedOn state that tracks if it is on or off
-  let [clickedOn, setClickedOn] = useState(false)
-  // Ficgure out even handlers in Material UI
+  const { classes, handleRecordingStateChange } = props
+  const handleClick = () => {
+    handleRecordingStateChange('play')
+  }
   return (
-    <Button className={classes.containedGreen}>
+    <Button className={classes.containedGreen} onClick={handleClick}>
       <PlayArrowOutlinedIcon style={{ fill: 'white' }} />
     </Button>
   )

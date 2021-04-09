@@ -55,10 +55,20 @@ function App() {
       setIsPlaying(true)
       checkRecordingState()
     }
+
+    if (value === 'create') {
+      setIsRecording(false)
+      setIsPlaying(false)
+      setIsVoiceNoteSelected(false)
+      setRecordingState('recordReady')
+      setSelectedVoiceNoteId(null)
+      checkRecordingState()
+    }
   }
 
   const handleVoiceNoteIdChange = (id) => {
     setSelectedVoiceNoteId(id)
+    setIsVoiceNoteSelected(true)
   }
 
   useEffect(() => {
@@ -67,7 +77,7 @@ function App() {
   })
   return (
     <div className='App'>
-      <MainNavbar />
+      <MainNavbar handleRecordingStateChange={handleRecordingStateChange} />
       <SidePanel
         voiceNotes={voiceNotes}
         handleVoiceNoteIdChange={handleVoiceNoteIdChange}
