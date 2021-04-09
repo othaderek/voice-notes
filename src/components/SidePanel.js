@@ -18,7 +18,7 @@ const styles = () => ({
 })
 
 function SidePanel(props) {
-  const { classes, voiceNotes } = props
+  const { classes, voiceNotes, handleVoiceNoteIdChange } = props
   return (
     <div className={classes.root}>
       <Drawer
@@ -27,7 +27,10 @@ function SidePanel(props) {
         className={classes.sidePanel}
         classes={{ paper: classes.drawerPaper }}
       >
-        <VoiceNotes voiceNotes={voiceNotes} />
+        <VoiceNotes
+          voiceNotes={voiceNotes}
+          handleVoiceNoteIdChange={handleVoiceNoteIdChange}
+        />
       </Drawer>
     </div>
   )

@@ -57,6 +57,10 @@ function App() {
     }
   }
 
+  const handleVoiceNoteIdChange = (id) => {
+    setSelectedVoiceNoteId(id)
+  }
+
   useEffect(() => {
     console.log(localforage)
     checkRecordingState()
@@ -64,7 +68,10 @@ function App() {
   return (
     <div className='App'>
       <MainNavbar />
-      <SidePanel voiceNotes={voiceNotes} />
+      <SidePanel
+        voiceNotes={voiceNotes}
+        handleVoiceNoteIdChange={handleVoiceNoteIdChange}
+      />
       <Dashboard
         recordingState={recordingState}
         handleRecordingStateChange={handleRecordingStateChange}

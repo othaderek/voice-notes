@@ -6,9 +6,10 @@ const styles = () => ({
 })
 
 function VoiceNote(props) {
-  const { classes, id, title } = props
+  const { classes, id, title, handleVoiceNoteIdChange } = props
   let handleClick = (e) => {
     console.log(id)
+    handleVoiceNoteIdChange(id)
   }
   return (
     <ListItem button className={classes.listItem} onClick={handleClick}>
