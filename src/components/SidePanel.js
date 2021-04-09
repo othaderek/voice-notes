@@ -1,4 +1,3 @@
-import React from 'react'
 import Drawer from '@material-ui/core/Drawer'
 import VoiceNotes from './VoiceNotes'
 import { withStyles } from '@material-ui/core'
