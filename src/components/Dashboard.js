@@ -36,11 +36,16 @@ function Dashboard(props) {
                 handleRecordingStateChange={handleRecordingStateChange}
               />
             ),
-            playReady: (
-              <PlayButton
-                handleRecordingStateChange={handleRecordingStateChange}
-              />
-            ),
+            playReady: (() => {
+              return (
+                <div>
+                  <div>Recording Details</div>
+                  <PlayButton
+                    handleRecordingStateChange={handleRecordingStateChange}
+                  />
+                </div>
+              )
+            })(),
           }[recordingState]
         }
       </Grid>
