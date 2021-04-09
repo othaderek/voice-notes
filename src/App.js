@@ -12,18 +12,18 @@ function App() {
   const [voiceNotes, setVoiceNotes] = useState([
     {
       id: 1,
-      title: 'Song idea'
+      title: 'Song idea',
     },
     {
       id: 2,
-      title: 'Book idea'
+      title: 'Book idea',
     },
     {
       id: 3,
-      title: 'thing that happened'
-    }
+      title: 'thing that happened',
+    },
   ])
-  const [selectedVoiceNoteId, setSelectedVoiceNoteId] = useState(null)]
+  const [selectedVoiceNoteId, setSelectedVoiceNoteId] = useState(null)
 
   const checkRecordingState = () => {
     if (isRecording) {
@@ -64,7 +64,7 @@ function App() {
   return (
     <div className='App'>
       <MainNavbar />
-      <SidePanel voiceNotes={voiceNotes}/>
+      <SidePanel voiceNotes={voiceNotes} />
       <Dashboard
         recordingState={recordingState}
         handleRecordingStateChange={handleRecordingStateChange}

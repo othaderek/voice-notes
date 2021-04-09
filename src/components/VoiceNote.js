@@ -6,13 +6,13 @@ const styles = () => ({
 })
 
 function VoiceNote(props) {
-  const { classes } = props
+  const { classes, id, title } = props
   let handleClick = (e) => {
-    console.log(e)
+    console.log(id)
   }
   return (
-    <ListItem button className={classes.listItem} onClick={handleClick} id='1'>
-      <ListItemText primary={'Voice recording'} id='1' />
+    <ListItem button className={classes.listItem} onClick={handleClick}>
+      <ListItemText primary={title} />
     </ListItem>
   )
 }
