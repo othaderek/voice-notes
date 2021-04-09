@@ -27,25 +27,29 @@ function Dashboard(props) {
               />
             ),
             playing: (
-              <StopButton
-                handleRecordingStateChange={handleRecordingStateChange}
-              />
+              <div>
+                <div style={{ textAlign: 'center' }}>Voice Note Details</div>
+                <StopButton
+                  handleRecordingStateChange={handleRecordingStateChange}
+                />
+              </div>
             ),
             recordReady: (
-              <RecordButton
-                handleRecordingStateChange={handleRecordingStateChange}
-              />
+              <div>
+                <div style={{ textAlign: 'center' }}>Click to Record</div>
+                <RecordButton
+                  handleRecordingStateChange={handleRecordingStateChange}
+                />
+              </div>
             ),
-            playReady: (() => {
-              return (
-                <div>
-                  <div>Recording Details</div>
-                  <PlayButton
-                    handleRecordingStateChange={handleRecordingStateChange}
-                  />
-                </div>
-              )
-            })(),
+            playReady: (
+              <div>
+                <div style={{ textAlign: 'center' }}>Voice Note Details</div>
+                <PlayButton
+                  handleRecordingStateChange={handleRecordingStateChange}
+                />
+              </div>
+            ),
           }[recordingState]
         }
       </Grid>
