@@ -95,6 +95,10 @@ As far as storing voice notes goes, I think for the purpose of demonstration it 
 
 The audio will be created using a few different pieces. The first is we need an audio element, this will use the internal microphone on the device we are using this app with. Then we need to create and instance of MediaRecorder, call start on that instance, add an event listener to media recorder instance and ad event data to the audio chunks array, create a blob instance with the audio chunks and then create and audio url with URL.createObjectUrl(audioBlob) and then a new audio instance with that audio url. We will be using the play and stop methods on this audio instance.
 
+### Playing the audio
+
+In order to play the audio, I want to store the audio in the app state and whenever I click play button in the dashboard I a running play on the audio in state. There should only ever be audio in state if a voice note has been clicked.
+
 ### Testing
 
 _add stuff_

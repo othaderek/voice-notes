@@ -108,7 +108,6 @@ function App() {
   }
 
   const playAudio = () => {
-    let itemPromise = localforageStore.getItem(audioId)
     itemPromise.then((val) => {
       console.log(audioId, val)
     })
@@ -128,7 +127,17 @@ function App() {
 
   const storeNewVoiceNote = (newVoiceNote) => {
     // setItem to localforageStore
+    let { title, id } = newVoiceNote
+    let note = {
+      id: id,
+      title: title,
+    }
+    setVoiceNotes([...voiceNotes], note)
     localforageStore.setItem(newVoiceNote.id, newVoiceNote)
+  }
+
+  const getVoiceNote = (id) => {
+    localforageStore.getItem(id)
   }
 
   // Lifecycle hooks
