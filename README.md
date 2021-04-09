@@ -97,7 +97,7 @@ The audio will be created using a few different pieces. The first is we need an 
 
 ### Playing the audio
 
-In order to play the audio, I want to store the audio in the app state and whenever I click play button in the dashboard I a running play on the audio in state. There should only ever be audio in state if a voice note has been clicked.
+In order to play the audio, I want to store the audio in the app state and whenever I click play button in the dashboard I a running play on the audio in state. There should only ever be audio in state if a voice note has been clicked. In order for us to query the correct audio file we have to store the uuid in the VoiceNote component and that needs to happen on creation.
 
 ### Testing
 

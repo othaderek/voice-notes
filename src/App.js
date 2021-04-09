@@ -12,20 +12,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isVoiceNoteSelected, setIsVoiceNoteSelected] = useState(false)
   const [recordingState, setRecordingState] = useState('recordReady')
-  const [voiceNotes, setVoiceNotes] = useState([
-    {
-      id: 1,
-      title: 'Song idea',
-    },
-    {
-      id: 2,
-      title: 'Book idea',
-    },
-    {
-      id: 3,
-      title: 'thing that happened',
-    },
-  ])
+  const [voiceNotes, setVoiceNotes] = useState([])
   const [selectedVoiceNoteId, setSelectedVoiceNoteId] = useState(null)
   const [audioId, setAudioId] = useState(null)
   const [mediaRecorder, setMediaRecord] = useState(null)
@@ -95,7 +82,6 @@ function App() {
     })
 
     createAudio()
-    setVoiceNotes([...voiceNotes, newVoiceNote])
   }
 
   const createAudio = () => {
@@ -108,6 +94,7 @@ function App() {
   }
 
   const playAudio = () => {
+    // audio.play()
     itemPromise.then((val) => {
       console.log(audioId, val)
     })
@@ -128,6 +115,7 @@ function App() {
   const storeNewVoiceNote = (newVoiceNote) => {
     // setItem to localforageStore
     let { title, id } = newVoiceNote
+
     let note = {
       id: id,
       title: title,
@@ -137,7 +125,9 @@ function App() {
   }
 
   const getVoiceNote = (id) => {
-    localforageStore.getItem(id)
+    localforageStore.getItem(id).then((val) => {
+      console.log(val)
+    })
   }
 
   // Lifecycle hooks
@@ -158,6 +148,7 @@ function App() {
       <SidePanel
         voiceNotes={voiceNotes}
         handleVoiceNoteIdChange={handleVoiceNoteIdChange}
+        getVoiceNote={getVoiceNote}
       />
       <Dashboard
         recordingState={recordingState}

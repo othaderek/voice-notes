@@ -29,6 +29,7 @@ function SidePanel(props) {
         <VoiceNotes
           voiceNotes={voiceNotes}
           handleVoiceNoteIdChange={handleVoiceNoteIdChange}
+          getVoiceNote={getVoiceNote}
         />
       </Drawer>
     </div>
