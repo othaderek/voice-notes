@@ -17,16 +17,12 @@ function RecordButton(props) {
   const { classes, handleRecordingStateChange } = props
 
   let handleClick = (e) => {
-    handleRecordingStateChange(e.target.name)
+    handleRecordingStateChange('recording')
   }
   // Ficgure out even handlers in Material UI
   return (
-    <Button
-      className={classes.containedRed}
-      name='recording'
-      onClick={handleClick}
-    >
-      <AlbumOutlinedIcon name='recording' />
+    <Button className={classes.containedRed} onClick={handleClick}>
+      <AlbumOutlinedIcon />
     </Button>
   )
 }

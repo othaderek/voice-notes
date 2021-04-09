@@ -9,7 +9,22 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isVoiceNoteSelected, setIsVoiceNoteSelected] = useState(false)
   const [recordingState, setRecordingState] = useState('recordReady')
-  const [selectedVoiceNoteId, setSelectedVoiceNoteId] = useState(null)
+  const [voiceNotes, setVoiceNotes] = useState([
+    {
+      id: 1,
+      title: 'Song idea'
+    },
+    {
+      id: 2,
+      title: 'Book idea'
+    },
+    {
+      id: 3,
+      title: 'thing that happened'
+    }
+  ])
+  const [selectedVoiceNoteId, setSelectedVoiceNoteId] = useState(null)]
+
   const checkRecordingState = () => {
     if (isRecording) {
       setRecordingState('recording')
@@ -49,7 +64,7 @@ function App() {
   return (
     <div className='App'>
       <MainNavbar />
-      <SidePanel />
+      <SidePanel voiceNotes={voiceNotes}/>
       <Dashboard
         recordingState={recordingState}
         handleRecordingStateChange={handleRecordingStateChange}

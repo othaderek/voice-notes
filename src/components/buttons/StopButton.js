@@ -13,11 +13,11 @@ const styles = (theme) => ({
 function StopButton(props) {
   const { classes, handleRecordingStateChange } = props
   let handleClick = (e) => {
-    handleRecordingStateChange(e.target.name)
+    handleRecordingStateChange('stop')
   }
   return (
-    <Button className={classes.stopButton} name='stop' onClick={handleClick}>
-      <StopOutlinedIcon style={{ fill: 'white' }} name='stop' />
+    <Button className={classes.stopButton} onClick={handleClick}>
+      <StopOutlinedIcon style={{ fill: 'white' }} />
     </Button>
   )
 }
