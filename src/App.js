@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import MainNavbar from './components/MainNavbar'
 import SidePanel from './components/SidePanel'
 import Dashboard from './components/Dashboard'
+import localforage from 'localforage'
 
 function App() {
   const [isRecording, setIsRecording] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isVoiceNoteSelected, setIsVoiceNoteSelected] = useState(false)
   const [recordingState, setRecordingState] = useState('recordReady')
+  const [selectedVoiceNoteId, setSelectedVoiceNoteId] = useState(null)
   const checkRecordingState = () => {
     if (isRecording) {
       setRecordingState('recording')
@@ -23,7 +25,6 @@ function App() {
   const handleRecordingStateChange = (value) => {
     console.log('handleRecordingStateChange: ' + value)
     if (value === 'recording') {
-      // check if voice note selected
       setIsRecording(true)
       checkRecordingState()
     }
@@ -42,6 +43,7 @@ function App() {
   }
 
   useEffect(() => {
+    console.log(localforage)
     checkRecordingState()
   })
   return (

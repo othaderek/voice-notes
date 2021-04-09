@@ -7,9 +7,12 @@ const styles = () => ({
 
 function VoiceNote(props) {
   const { classes } = props
+  let handleClick = (e) => {
+    console.log(e)
+  }
   return (
-    <ListItem button className={classes.listItem}>
-      <ListItemText primary={'Voice recording'} />
+    <ListItem button className={classes.listItem} onClick={handleClick} id='1'>
+      <ListItemText primary={'Voice recording'} id='1' />
     </ListItem>
   )
 }

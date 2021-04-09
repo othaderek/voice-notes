@@ -80,7 +80,16 @@ When recording dashboard background color changes red
 When playing background changes green
 WHen deleting user is prompted if they are sure they want to delete
 
----
+### Voice Note
+
+Each individual voice note will have a click event on it that triggers inverse data flow state change in the app component
+We have to track which voie not has been clicked and save that in the app components state
+This means that every voice note component needs to have a unique id attached to it
+Default state of clicked voice note should be null and when you click a voice note it should change the selectedVoiceNoteID to the one that has been clicked
+
+### Storing Voice Notes
+
+As far as storing voice notes goes, I think for the purpose of demonstration it woul dbe easier to store Blobs to IndexedDB and get/set the blobs using localforage. So when I click on a List Item in the side panel, on click I would be sending the id of that list item to query the voice not blob in storage. The localforage queries should be executed in each list item but most of the application state is in app and voice note data will render in the dashboard. So the click event will have to travel up from the ListItems, through the List, through the SidePanel and into the App component, add the current list item to a currentVoiceNoteState and travel down into the dashboard. This might be a good point to use Redux.
 
 ### Testing
 
