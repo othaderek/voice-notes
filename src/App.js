@@ -116,6 +116,8 @@ function App() {
 
   const createNewVoiceNote = (title, audio) => {
     let id = uuidv4()
+    let d = new Date()
+    let title = `${d.toLocaleDateString} ${d.toLocaleTimeString}`
     let newVoiceNote = {
       id: id,
       title: title,
