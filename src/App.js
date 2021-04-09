@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import MainNavbar from './components/MainNavbar'
 import SidePanel from './components/SidePanel'
 import Dashboard from './components/Dashboard'
+import { v4 as uuidv4 } from 'uuid'
 import localforage from 'localforage'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
     },
   ])
   const [selectedVoiceNoteId, setSelectedVoiceNoteId] = useState(null)
+  const [audioId, setAudioId] = useState(null)
 
   const checkRecordingState = () => {
     if (isRecording) {
@@ -42,6 +44,7 @@ function App() {
     if (value === 'recording') {
       setIsRecording(true)
       checkRecordingState()
+      createRecording()
     }
 
     if (value === 'stop') {
@@ -52,6 +55,7 @@ function App() {
 
     if (value === 'play') {
       setIsRecording(false)
+      playAudio()
       setIsPlaying(true)
       checkRecordingState()
     }
@@ -71,12 +75,44 @@ function App() {
     setIsVoiceNoteSelected(true)
   }
 
+  const createRecording = () => {
+    const id = uuidv4()
+    console.log(id)
+    setAudioId(id)
+    let newVoiceNote = {
+      id: id,
+      title: 'newly created item',
+      audio: null,
+    }
+    localforage.setItem(id, newVoiceNote)
+    setVoiceNotes([...voiceNotes, newVoiceNote])
+    // navigator.mediaDevices.getUserMedia({audio: true})
+    // .then( stream => {...})
+    // Create an instance of MediaRecorder
+    // Call start on that instance
+    // add event listener 'dataavailable' to the mediaRecorder instance, the callback pushes event.data into an array called audio chunks
+    // under this event listener add another one that has a stop event that calls a createAudio callback
+  }
+
+  const createAudio = () => {
+    // this creates a new audio blob
+    // URL.createObjectURl(audioBlob)
+    // Create new audio object with audio url
+  }
+
+  const playAudio = () => {
+    let itemPromise = localforage.getItem(audioId)
+    itemPromise.then((val) => {
+      console.log(audioId, val)
+    })
+  }
   useEffect(() => {
     console.log(localforage)
     checkRecordingState()
   })
   return (
     <div className='App'>
+      <audio />
       <MainNavbar handleRecordingStateChange={handleRecordingStateChange} />
       <SidePanel
         voiceNotes={voiceNotes}
@@ -85,6 +121,7 @@ function App() {
       <Dashboard
         recordingState={recordingState}
         handleRecordingStateChange={handleRecordingStateChange}
+        playAudio={playAudio}
       />
     </div>
   )
