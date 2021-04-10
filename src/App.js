@@ -243,6 +243,7 @@ function App() {
         createAudio={createAudio}
         stopRecording={stopRecording}
         stopPlaying={stopPlaying}
+        selectedVoiceNote={selectedVoiceNote}
       />
     </div>
   )
