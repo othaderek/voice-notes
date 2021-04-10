@@ -2,7 +2,8 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import Grid from '@material-ui/core/Grid'
 import RecordButton from './buttons/RecordButton'
 import PlayButton from './buttons/PlayButton'
-import StopButton from './buttons/StopButton'
+import StopRecordingButton from './buttons/StopRecordingButton'
+import StopPlayingButton from './buttons/StopPlayingButton'
 
 const styles = () => ({
   dashboard: {
@@ -27,7 +28,7 @@ function Dashboard(props) {
         {
           {
             recording: (
-              <StopButton
+              <StopRecordingButton
                 stopRecording={stopRecording}
                 handleRecordingStateChange={handleRecordingStateChange}
               />
@@ -35,7 +36,7 @@ function Dashboard(props) {
             playing: (
               <div>
                 <div style={{ textAlign: 'center' }}>Voice Note Details</div>
-                <StopButton
+                <StopPlayingButton
                   handleRecordingStateChange={handleRecordingStateChange}
                 />
               </div>

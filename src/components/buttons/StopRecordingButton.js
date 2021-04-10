@@ -9,7 +9,7 @@ const styles = (theme) => ({
   },
 })
 
-function StopButton(props) {
+function StopRecordingButton(props) {
   const { classes, handleRecordingStateChange, stopRecording } = props
   let handleClick = (e) => {
     handleRecordingStateChange('stop')
@@ -22,4 +22,4 @@ function StopButton(props) {
   )
 }
 
-export default withStyles(styles)(StopButton)
+export default withStyles(styles)(StopRecordingButton)
