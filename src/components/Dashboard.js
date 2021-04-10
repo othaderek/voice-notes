@@ -21,6 +21,7 @@ function Dashboard(props) {
     recordingState,
     handleRecordingStateChange,
     stopRecording,
+    playAudio,
   } = props
   return (
     <div className={classes.dashboard}>
@@ -54,6 +55,7 @@ function Dashboard(props) {
                 <div style={{ textAlign: 'center' }}>Voice Note Details</div>
                 <PlayButton
                   handleRecordingStateChange={handleRecordingStateChange}
+                  playAudio={playAudio}
                 />
               </div>
             ),

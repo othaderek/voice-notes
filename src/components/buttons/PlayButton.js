@@ -13,9 +13,10 @@ const styles = (theme) => ({
 })
 
 function PlayButton(props) {
-  const { classes, handleRecordingStateChange } = props
+  const { classes, handleRecordingStateChange, playAudio } = props
   const handleClick = () => {
     handleRecordingStateChange('play')
+    playAudio()
   }
   return (
     <Button className={classes.containedGreen} onClick={handleClick}>

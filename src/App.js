@@ -53,6 +53,9 @@ function App() {
       setIsRecording(false)
       setIsPlaying(true)
       checkRecordingState()
+      if (audio.paused) {
+        setIsPlaying(false)
+      }
     }
 
     if (value === 'create') {
@@ -217,13 +220,13 @@ function App() {
     }
   }, [selectedVoiceNote])
 
-  useEffect(() => {
-    if (audio === null) {
-      return null
-    } else {
-      playAudio()
-    }
-  }, [audio])
+  // useEffect(() => {
+  //   if (audio === null) {
+  //     return null
+  //   } else {
+  //     playAudio()
+  //   }
+  // }, [audio])
   return (
     <div className='App'>
       <audio />
