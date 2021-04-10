@@ -39,6 +39,7 @@ function App() {
     if (value === 'recording') {
       setIsRecording(true)
       checkRecordingState()
+      clearPreviousRecordingData()
       createRecording()
     }
 
@@ -68,6 +69,13 @@ function App() {
     // setSelectedVoiceNoteId(id)
     setAudioId(id)
     setIsVoiceNoteSelected(true)
+  }
+
+  const clearPreviousRecordingData = () => {
+    setMediaRecorder(null)
+    setAudioChunks([])
+    setAudioBlob(null)
+    setAudioURL(null)
   }
 
   const createRecording = () => {
