@@ -1,7 +1,12 @@
 import List from '@material-ui/core/List'
 import VoiceNote from './VoiceNote'
 
-function VoiceNotes({ voiceNotes, handleVoiceNoteIdChange, getVoiceNote }) {
+function VoiceNotes({
+  voiceNotes,
+  handleVoiceNoteIdChange,
+  getVoiceNote,
+  deleteVoiceNote,
+}) {
   const notes = () => {
     return voiceNotes.map((voiceNote) => {
       return (
@@ -11,6 +16,7 @@ function VoiceNotes({ voiceNotes, handleVoiceNoteIdChange, getVoiceNote }) {
           title={voiceNote.title}
           handleVoiceNoteIdChange={handleVoiceNoteIdChange}
           getVoiceNote={getVoiceNote}
+          deleteVoiceNote={deleteVoiceNote}
         />
       )
     })

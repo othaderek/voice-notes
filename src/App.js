@@ -35,7 +35,6 @@ function App() {
   }
 
   const handleRecordingStateChange = (value) => {
-    console.log('handleRecordingStateChange: ' + value)
     if (value === 'recording') {
       setIsRecording(true)
       checkRecordingState()
@@ -63,13 +62,11 @@ function App() {
       setIsPlaying(false)
       setIsVoiceNoteSelected(false)
       setRecordingState('recordReady')
-      // setSelectedVoiceNoteId(null)
       checkRecordingState()
     }
   }
 
   const handleVoiceNoteIdChange = (id) => {
-    // setSelectedVoiceNoteId(id)
     setAudioId(id)
     setIsVoiceNoteSelected(true)
   }
@@ -88,7 +85,6 @@ function App() {
   }
 
   const startRecording = () => {
-    console.log('mediaRecorder: ', mediaRecorder)
     mediaRecorder.start()
     getAudioChunks()
     mediaRecorder.addEventListener('stop', createAudioBlob)
@@ -104,10 +100,7 @@ function App() {
     return new MediaRecorder(stream)
   }
 
-  const createAudioBlob = () => {
-    console.log('audioChunks: ', audioChunks)
-    console.log('audioBlob: ', audioBlob)
-  }
+  const createAudioBlob = () => {}
 
   const createAudio = () => {
     setAudio(new Audio(selectedVoiceNote.audioURL))
@@ -115,10 +108,10 @@ function App() {
 
   const playAudio = () => {
     audio.play()
+    setIsPlaying(true)
   }
 
   const stopRecording = () => {
-    console.log('stopped recording')
     mediaRecorder.stop()
   }
 
@@ -127,7 +120,6 @@ function App() {
   }
 
   const createNewVoiceNote = () => {
-    console.log('Creating new voice note')
     let id = uuidv4()
     let d = new Date()
     let title = `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`
@@ -140,23 +132,26 @@ function App() {
   }
 
   const storeNewVoiceNote = (newVoiceNote) => {
-    // setItem to localforageStore
-    // let { title, id } = newVoiceNote
-
-    // let note = {
-    //   id: id,
-    //   title: title,
-    // }
     setVoiceNotes([...voiceNotes, newVoiceNote])
-    console.log('voice notes', voiceNotes)
     localforageStore.setItem(newVoiceNote.id, newVoiceNote)
   }
 
   const getVoiceNote = (id) => {
     localforageStore.getItem(id).then((val) => {
-      console.log('voice note', val)
       setSelectedVoiceNote(val)
     })
+  }
+
+  const deleteVoiceNote = (id) => {
+    if (selectedVoiceNote === null) {
+      return null
+    } else {
+      if (selectedVoiceNote.id === id) {
+        console.log('hi')
+        setSelectedVoiceNote(null)
+        let newNotes = voiceNotes.filter((voiceNote) => voiceNote.id !== id)
+      }
+    }
   }
 
   // Lifecycle hooks
@@ -188,7 +183,6 @@ function App() {
     if (audioChunks.length === 0) {
       return null
     } else {
-      console.log('audio chunks not null')
       setAudioBlob(new Blob(audioChunks))
     }
   }, [audioChunks])
@@ -220,13 +214,18 @@ function App() {
     }
   }, [selectedVoiceNote])
 
-  // useEffect(() => {
-  //   if (audio === null) {
-  //     return null
-  //   } else {
-  //     playAudio()
-  //   }
-  // }, [audio])
+  useEffect(() => {
+    if (audio) {
+      if (audio.paused) {
+        setIsPlaying(false)
+        setRecordingState('playReady')
+      } else {
+      }
+    } else {
+      return null
+    }
+  }, [audio])
+
   return (
     <div className='App'>
       <audio />
@@ -235,6 +234,7 @@ function App() {
         voiceNotes={voiceNotes}
         handleVoiceNoteIdChange={handleVoiceNoteIdChange}
         getVoiceNote={getVoiceNote}
+        deleteVoiceNote={deleteVoiceNote}
       />
       <Dashboard
         recordingState={recordingState}

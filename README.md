@@ -99,6 +99,10 @@ The audio will be created using a few different pieces. The first is we need an 
 
 In order to play the audio, I want to store the audio in the app state and whenever I click play button in the dashboard I a running play on the audio in state. There should only ever be audio in state if a voice note has been clicked. In order for us to query the correct audio file we have to store the uuid in the VoiceNote component and that needs to happen on creation.
 
+### Deleting voice notes
+
+I want to add a delete icon on every voice note that I create that removes that voice note from the db and from the dom. Each voice note item on the side panel will have a delete icon that has a click handler on it that sends and id up to the app state that removes the item with that id from the app state and also removes it from the db.
+
 ### Testing
 
 _add stuff_
