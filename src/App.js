@@ -107,12 +107,20 @@ function App() {
   }
 
   const playAudio = () => {
+    console.log(audio.duration)
     audio.play()
     setIsPlaying(true)
+
+    setInterval(() => {
+      if (audio.paused) {
+        setIsPlaying(false)
+      }
+    }, audio.duration * 1000)
   }
 
   const stopRecording = () => {
     mediaRecorder.stop()
+    setIsRecording(false)
   }
 
   const stopPlaying = () => {
@@ -148,10 +156,25 @@ function App() {
     } else {
       if (selectedVoiceNote.id === id) {
         console.log('hi')
+        setRecordingState('recordReady')
         setSelectedVoiceNote(null)
+        setIsVoiceNoteSelected(false)
         let newNotes = voiceNotes.filter((voiceNote) => voiceNote.id !== id)
+        setVoiceNotes(newNotes)
+      } else {
+        let newNotes = voiceNotes.filter((voiceNote) => voiceNote.id !== id)
+        setVoiceNotes(newNotes)
       }
     }
+    setTimeout(() => {
+      if (voiceNotes.length === 0) {
+        console.log('none')
+        clearPreviousRecordingData()
+        setRecordingState('recordReady')
+        setIsVoiceNoteSelected(false)
+        clearPreviousRecordingData()
+      }
+    }, 1000)
   }
 
   // Lifecycle hooks
@@ -166,6 +189,16 @@ function App() {
 
   // Checks recording state on render
   useEffect(() => {
+    if (recordingState === 'playing') {
+      if (audio) {
+        if (audio.paused) {
+          console.log('audio is paused')
+          setIsPlaying(false)
+          setRecordingState('playReady')
+          checkRecordingState()
+        }
+      }
+    }
     checkRecordingState()
   })
 
